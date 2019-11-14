@@ -1,85 +1,56 @@
-let sheetWidth = double(25),
-    sheetHeight = double(19),
-    pageWidth = double(11),
-    pageHeight = double(6),
-    colorBarWidth = sheetWidth,
+let sheetW = double(25),
+    sheetH = double(19),
+    pageW = double(5.5),
+    pageH = double(8.5),
+    colorBarWidth = sheetW,
     colorBarHeight = double(.375),
-    gripperWidth = sheetWidth,
+    gripperWidth = sheetW,
     gripperHeight = double(.375),
-    nupWidth = sheetWidth,
-    nupHeight = sheetHeight - (colorBarHeight + gripperHeight),
-    nupWidthSwing = sheetWidth,
-    nupHeightSwing = sheetHeight - (colorBarHeight + gripperHeight),
-    nupX = 0,
-    nupY = 0,
-    nupYSwing = 0,
-    nupXSwing = 0,
-    nupAmount;
+    rows = [];
+
 
 function double(x) {
     return parseFloat(x);
 }
 
-function nupWithBleed(bleedAmount) {
-    let bleed = double(bleedAmount * 2); //?
-    let colorBarArea = colorBarWidth * colorBarHeight; //?
-    let gripperArea = gripperWidth * gripperHeight; //?
-    let sheetArea = (sheetWidth * sheetHeight) - (gripperArea + colorBarArea); //?
-    let pageArea = (pageWidth + bleed) * (pageHeight + bleed); //?
-
-    return Math.floor(sheetArea / pageArea); //?
-
+function pageHeight(bleedAmount = 0) {
+    const bleed = bleedAmount * 2;
+    return pageH + bleed;
 }
 
-
-function addPagesX(bleedAmount) {
-    let bleed = bleedAmount * 2;
-    if (nupWidth > pageWidth) {
-        nupWidth = nupWidth - (pageWidth + bleed); //?
-        nupX++;
-        addPagesX(bleedAmount);
-    }
+function pageWidth(bleedAmount = 0) {
+    const bleed = bleedAmount * 2;
+    return pageW + bleed;
 }
 
-function addPagesY(bleedAmount) {
-    let bleed = bleedAmount * 2;
-    if (nupHeight > pageHeight) {
-        nupHeight = nupHeight - (pageHeight + bleed); //?
-        nupY++;
-        addPagesY(bleedAmount);
-    }
+function sheetHeight(margins = 0) {
+    return sheetH - (colorBarHeight + gripperHeight + margins);
 }
 
-function addPagesXSwing(bleedAmount) {
-    let bleed = bleedAmount * 2;
-    if (nupWidthSwing > pageHeight) {
-        nupWidthSwing = nupWidthSwing - (pageHeight + bleed); //?
-        nupXSwing++;
-        addPagesXSwing(bleedAmount);
-    }
+function sheetWidth(margins = 0) {
+    return sheetW - margins;
 }
 
-function addPagesYSwing(bleedAmount) {
-    let bleed = bleedAmount * 2;
-    if (nupHeightSwing > pageHeight) {
-        nupHeightSwing = nupHeightSwing - (pageHeight + bleed); //?
-        nupYSwing++;
-        addPagesYSwing(bleedAmount);
-    }
-}
+// Portrait normal bleed
+Math.floor(sheetWidth() / pageWidth(.125))//?
+Math.floor(sheetHeight() / pageHeight(.125)) //?
 
-addPagesX(.0625)
-addPagesY(.0625)
-addPagesXSwing(.0625)
-addPagesYSwing(.0625)
-nupWithBleed(.125);
+// Landscape normal bleed
+Math.floor(sheetWidth(.5) / pageHeight(.125))//?
+Math.floor(sheetHeight() / pageWidth(.125)) //?
 
-nupX //? 
-nupY
-nupXSwing //?
-nupYSwing //?
+// Portrait small bleed
+Math.floor(sheetWidth() / pageWidth(.0625))//?
+Math.floor(sheetHeight() / pageHeight(.0625)) //?
 
-let resultX = (nupX > nupXSwing) ? nupX : nupXSwing //?
-let resultY = (nupY > nupYSwing) ? nupY : nupYSwing //?
+// Landscape small bleed
+Math.floor(sheetWidth(.5) / pageHeight(.0625))//?
+Math.floor(sheetHeight() / pageWidth(.0625)) //?
 
-let NUP = resultX + resultY; //?
+// Portrait no bleed
+Math.floor(sheetWidth() / pageWidth())//?
+Math.floor(sheetHeight() / pageHeight()) //?
+
+// Landscape no bleed
+Math.floor(sheetWidth(.5) / pageHeight())//?
+Math.floor(sheetHeight() / pageWidth()) //?
