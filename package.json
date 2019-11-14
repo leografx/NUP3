@@ -1,0 +1,25 @@
+{
+  "name": "nup3",
+  "version": "1.0.0",
+  "description": "Number of pages to fit on a sheet",
+  "main": "nup3.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/leografx/nup3.git"
+  },
+  "keywords": [
+    "Nup"
+  ],
+  "author": "Leo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/leografx/nup3/issues"
+  },
+  "homepage": "https://github.com/leografx/nup3#readme",
+  "dependencies": {
+    "electron": "^7.1.1"
+  }
+}
