@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/leografx/nup3#readme",
   "dependencies": {
-    "electron": "^7.1.1"
+    "electron": "^18.3.7"
   }
 }
